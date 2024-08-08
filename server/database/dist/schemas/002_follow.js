@@ -3,8 +3,8 @@ export async function up(db) {
     await db.schema
         .createTable("follow")
         .addColumn("id", "uuid", (col) => col.primaryKey().defaultTo(sql `gen_random_uuid()`))
-        .addColumn("following_id", "uuid", (col) => col.references("users.id").onDelete("cascade").notNull())
-        .addColumn("follower_id", "uuid", (col) => col.references("users.id").onDelete("cascade").notNull())
+        .addColumn("following_id", "uuid", (col) => col.references("user.id").onDelete("cascade").notNull())
+        .addColumn("follower_id", "uuid", (col) => col.references("user.id").onDelete("cascade").notNull())
         .addColumn("created_at", "timestamp", (col) => col.defaultTo(sql `now()`).notNull())
         .addColumn("updated_at", "timestamp", (col) => col.defaultTo(sql `now()`).notNull())
         .addUniqueConstraint("follower_id following_id", [
