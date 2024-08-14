@@ -8,10 +8,10 @@ export async function up(db: Kysely<any>): Promise<void> {
             col.primaryKey().defaultTo(sql`gen_random_uuid()`)
         )
         .addColumn("following_id", "uuid", (col) =>
-            col.references("users.id").onDelete("cascade").notNull()
+            col.references("user.id").onDelete("cascade").notNull()
         )
         .addColumn("follower_id", "uuid", (col) =>
-            col.references("users.id").onDelete("cascade").notNull()
+            col.references("user.id").onDelete("cascade").notNull()
         )
         .addColumn("created_at", "timestamp", (col) =>
             col.defaultTo(sql`now()`).notNull()
